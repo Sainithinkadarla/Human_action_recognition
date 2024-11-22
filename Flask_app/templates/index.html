@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Action Recognition</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f9f9f9;
+        }
+        .container {
+            width: 50%;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+        .results {
+            margin-top: 20px;
+        }
+        .sequence {
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Human Action Recognition</h1>
+        <form id="uploadForm">
+            <label for="video">Upload Video:</label>
+            <input type="file" id="video" name="video" accept="video/*" required>
+            <button type="submit">Submit</button>
+        </form>
+        <div class="results">
+            <h2>Results</h2>
+            <div class="sequence" id="actionSequence"></div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('uploadForm');
+        const sequenceDiv = document.getElementById('actionSequence');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData();
+            const videoFile = document.getElementById('video').files[0];
+            formData.append('video', videoFile);
+
+            const response = await fetch('/upload', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const results = await response.json();
+            if (response.ok) {
+                sequenceDiv.innerHTML = `<strong>Action Sequence:</strong> ${results.action_sequence.join(' -> ')}`;
+            } else {
+                sequenceDiv.innerHTML = `<strong>Error:</strong> ${results.error}`;
+            }
+        });
+    </script>
+</body>
+</html>
