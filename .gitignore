@@ -9,7 +9,7 @@ working_model.h5
 
 *.zip
 Videos
-Test/
+Test*
 *.png
-*copy.ipynb
-/uploads
+*copy*
+uploads
