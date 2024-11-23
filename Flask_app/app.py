@@ -12,7 +12,7 @@ app = Flask(__name__)
 # Load pre-trained model
 mobilenetv3large = load_model("static/Models/mobilenetv3large.keras")
 
-train_data = pd.read_csv("../archive (1)/Human Action Recognition/Training_set.csv")
+train_data = pd.read_csv("Training_set.csv")
 label_mapping = dict(enumerate(train_data['label'].unique()))
 
 # Video processing function
