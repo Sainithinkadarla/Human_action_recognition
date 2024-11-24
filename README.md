@@ -48,6 +48,7 @@ This project implements a comparative study of different Convolutional Neural Ne
     pip install -r requirements.txt
     
     ```
+3. Download dataset from [link](https://www.kaggle.com/datasets/meetnagadia/human-action-recognition-har-dataset)
     
 
 ### Training:
